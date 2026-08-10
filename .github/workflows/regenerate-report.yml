@@ -1,5 +1,11 @@
 name: Regenerate weekly report
-
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'data/current_week.csv'
+      - 'data/previous_week.csv'
 on:
   push:
     branches: [main]
