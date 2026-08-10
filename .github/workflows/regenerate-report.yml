@@ -1,12 +1,7 @@
 name: Regenerate weekly report
+
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - 'data/current_week.csv'
-      - 'data/previous_week.csv'
-on:
   push:
     branches: [main]
     paths:
@@ -22,18 +17,14 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
-
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-
       - name: Install dependencies
         run: pip install -r requirements.txt
-
       - name: Run report generator
         run: python weekly_report.py
-
       - name: Commit and push updated report
         run: |
           git config user.name "github-actions[bot]"
