@@ -8,6 +8,10 @@ on:
       - 'data/current_week.csv'
       - 'data/previous_week.csv'
 
+concurrency:
+  group: regenerate-report
+  cancel-in-progress: false
+
 permissions:
   contents: write
 
@@ -31,4 +35,5 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add weekly_report.html weekly_report.png
           git diff --quiet --cached || git commit -m "Regenerate weekly_report via GitHub Actions"
+          git pull --rebase origin main
           git push
