@@ -1,4 +1,5 @@
 import pandas as pd
+import json
 from pathlib import Path
 from datetime import datetime
 import webbrowser
@@ -11,13 +12,15 @@ import matplotlib.pyplot as plt
 # =========================
 # Config
 # =========================
-OTP_TARGET = 26000
-
 BASE_DIR = Path(__file__).parent
 DATA_DIR = BASE_DIR / "data"
 
 CURRENT_PATH = DATA_DIR / "current_week.csv"
 PREVIOUS_PATH = DATA_DIR / "previous_week.csv"
+
+TARGETS_PATH = DATA_DIR / "targets.json"
+with open(TARGETS_PATH) as f:
+    OTP_TARGET = json.load(f)["otp_target"]
 
 OUTPUT_HTML = BASE_DIR / "weekly_report.html"
 
