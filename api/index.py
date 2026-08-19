@@ -20,6 +20,12 @@ def digital_hub():
     html_path = BASE_DIR / "page" / "index.html"
     return html_path.read_text(encoding="utf-8")
 
+@app.get("/link", response_class=HTMLResponse)
+@app.get("/link/", response_class=HTMLResponse)
+def link_hub():
+    html_path = BASE_DIR / "link" / "index.html"
+    return html_path.read_text(encoding="utf-8")
+
 @app.get("/seo", response_class=HTMLResponse)
 def seo_report():
     html_path = BASE_DIR / "seo" / "seo_weekly_report.html"
