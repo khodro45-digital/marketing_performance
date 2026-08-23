@@ -7,6 +7,7 @@ on:
     paths:
       - 'data/current_week.csv'
       - 'data/previous_week.csv'
+      - 'data/targets.json'
 
 concurrency:
   group: regenerate-report
@@ -33,9 +34,8 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add weekly_report.html weekly_report.png
+          git add weekly_report.html weekly_report.png assets/channel_split_donut.png
           git diff --quiet --cached || git commit -m "Regenerate weekly_report via GitHub Actions"
-          git checkout -- .
-          git clean -fd
-          git pull --rebase origin main
+          git fetch origin main
+          git merge -X ours --no-edit origin/main
           git push
